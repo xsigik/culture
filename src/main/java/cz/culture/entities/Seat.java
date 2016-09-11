@@ -1,5 +1,6 @@
 package cz.culture.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "seat")
-@ToString(of={"id", "name"})
+@ToString(of={"id", "number"})
 public class Seat {
 
     @Id
@@ -22,11 +23,12 @@ public class Seat {
     private Long id;
 
     @Column
-    private String name;
+    private String number;
 
     @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Visit> visits;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "row_id")
     private Row row;

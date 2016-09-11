@@ -29,7 +29,7 @@ CREATE TABLE `building` (
   `name` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,14 +75,11 @@ DROP TABLE IF EXISTS `hall`;
 CREATE TABLE `hall` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `building` bigint(20) DEFAULT NULL,
   `building_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKsorngxo6tbwpk7lh02i5wlbwa` (`building`),
   KEY `FK8mdnj1859y5ln6u7atsm2tw1o` (`building_id`),
-  CONSTRAINT `FK8mdnj1859y5ln6u7atsm2tw1o` FOREIGN KEY (`building_id`) REFERENCES `building` (`id`),
-  CONSTRAINT `FKsorngxo6tbwpk7lh02i5wlbwa` FOREIGN KEY (`building`) REFERENCES `building` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK8mdnj1859y5ln6u7atsm2tw1o` FOREIGN KEY (`building_id`) REFERENCES `building` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +88,7 @@ CREATE TABLE `hall` (
 
 LOCK TABLES `hall` WRITE;
 /*!40000 ALTER TABLE `hall` DISABLE KEYS */;
-INSERT INTO `hall` VALUES (1,'Hlavní scéna',1,NULL),(2,'Hlavní scéna',1,NULL),(3,'Hlavní scéna',1,NULL);
+INSERT INTO `hall` VALUES (1,'Hlavní scéna',1);
 /*!40000 ALTER TABLE `hall` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,14 +125,11 @@ DROP TABLE IF EXISTS `row`;
 CREATE TABLE `row` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `number` int(11) DEFAULT NULL,
-  `sector` bigint(20) DEFAULT NULL,
   `sector_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKsm414yis4i6ofmyc0hwqj416n` (`sector`),
   KEY `FKoe5m6eojw58c9dcmfsh2wph5y` (`sector_id`),
-  CONSTRAINT `FKoe5m6eojw58c9dcmfsh2wph5y` FOREIGN KEY (`sector_id`) REFERENCES `sector` (`id`),
-  CONSTRAINT `FKsm414yis4i6ofmyc0hwqj416n` FOREIGN KEY (`sector`) REFERENCES `sector` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `FKoe5m6eojw58c9dcmfsh2wph5y` FOREIGN KEY (`sector_id`) REFERENCES `sector` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,6 +138,7 @@ CREATE TABLE `row` (
 
 LOCK TABLES `row` WRITE;
 /*!40000 ALTER TABLE `row` DISABLE KEYS */;
+INSERT INTO `row` VALUES (1,1,1),(2,2,1),(3,3,1);
 /*!40000 ALTER TABLE `row` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,15 +151,12 @@ DROP TABLE IF EXISTS `seat`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `seat` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `row` bigint(20) DEFAULT NULL,
+  `number` varchar(255) DEFAULT NULL,
   `row_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK8vunp9pmu4luvhw4dcekbhvij` (`row`),
   KEY `FKdi0ritgi9llxrfh0l35slxtfv` (`row_id`),
-  CONSTRAINT `FK8vunp9pmu4luvhw4dcekbhvij` FOREIGN KEY (`row`) REFERENCES `row` (`id`),
   CONSTRAINT `FKdi0ritgi9llxrfh0l35slxtfv` FOREIGN KEY (`row_id`) REFERENCES `row` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,6 +165,7 @@ CREATE TABLE `seat` (
 
 LOCK TABLES `seat` WRITE;
 /*!40000 ALTER TABLE `seat` DISABLE KEYS */;
+INSERT INTO `seat` VALUES (1,'1',1),(2,'2',1),(3,'3',1),(4,'4',1),(5,'5',1),(6,'6',1),(7,'7',1),(8,'8',1),(9,'9',1),(10,'10',1),(11,'11',1),(12,'12',1),(13,'13',1),(14,'14',1),(15,'15',1),(16,'16',1),(17,'17',1),(18,'18',1);
 /*!40000 ALTER TABLE `seat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,16 +178,13 @@ DROP TABLE IF EXISTS `sector`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sector` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `number` int(11) DEFAULT NULL,
-  `hall` bigint(20) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
   `hall_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKmym335eurc6bwv16u97jj9tgg` (`hall`),
   KEY `FK5nagxsey370lx6nmytt020kxd` (`hall_id`),
-  CONSTRAINT `FK5nagxsey370lx6nmytt020kxd` FOREIGN KEY (`hall_id`) REFERENCES `hall` (`id`),
-  CONSTRAINT `FKmym335eurc6bwv16u97jj9tgg` FOREIGN KEY (`hall`) REFERENCES `hall` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK5nagxsey370lx6nmytt020kxd` FOREIGN KEY (`hall_id`) REFERENCES `hall` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,7 +193,7 @@ CREATE TABLE `sector` (
 
 LOCK TABLES `sector` WRITE;
 /*!40000 ALTER TABLE `sector` DISABLE KEYS */;
-INSERT INTO `sector` VALUES (1,0,1,'Prízemí',NULL),(2,1,1,'1. balkon',NULL),(3,2,1,'2. balkon',NULL);
+INSERT INTO `sector` VALUES (1,'Prízemí',0,1),(2,'1. balkon',1,1),(3,'2. balkon',2,1);
 /*!40000 ALTER TABLE `sector` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,4 +265,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-11 15:28:51
+-- Dump completed on 2016-09-11 21:40:11

@@ -1,5 +1,6 @@
 package cz.culture.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 
@@ -27,6 +28,7 @@ public class Row {
     @OneToMany(mappedBy = "row", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Seat> seats;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "sector_id")
     private Sector sector;
