@@ -5,6 +5,7 @@ import cz.culture.repositories.HallRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by jvalenta on 11.9.16.
@@ -17,6 +18,7 @@ public class HallService {
     @Autowired
     HallRepo hallRepo;
 
+    @Transactional
     public Hall getHall(Long id) {
 
         Hall hall = hallRepo.findOne(id);
