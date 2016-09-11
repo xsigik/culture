@@ -1,11 +1,14 @@
 package cz.culture.controllers;
 
-import cz.culture.entities.Hall;
+import cz.culture.dto.HallDTO;
 import cz.culture.services.HallService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by jvalenta on 11.9.16.
@@ -21,12 +24,12 @@ public class HallController {
 
     @RequestMapping(value = "{id}", produces = "application/json", method = RequestMethod.GET)
     @ResponseBody
-    public Hall getHall(@PathVariable(value = "id") Long id) throws Exception {
+    public HallDTO getHall(@PathVariable(value = "id") Long id) throws Exception {
 
-        Hall hall = hallService.getHall(id);
-        log.info("Nalezena scena: {}", hall);
+        HallDTO dto = hallService.getHall(id);
+        log.info("Nalezena hala: {}", dto);
 
-        return hall;
+        return dto;
 
     }
 

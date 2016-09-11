@@ -1,6 +1,7 @@
 package cz.culture.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "hall")
+@ToString(of={"id", "name"})
 public class Hall {
 
     @Id

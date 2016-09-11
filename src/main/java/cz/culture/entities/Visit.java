@@ -1,6 +1,7 @@
 package cz.culture.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "visit")
+@ToString(of={"id", "date", "note", "price"})
 public class Visit {
 
     @Id
